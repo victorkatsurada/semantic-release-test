@@ -57,3 +57,6 @@ outputs:
     description: "The new releases' minor version number, i.e. `8`"
   release-patch:
     description: "The new releases' patch version number, i.e. `3`"
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
