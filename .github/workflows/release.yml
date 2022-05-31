@@ -13,6 +13,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: semantic-release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         id: semantic-test
         uses: ./
         with:
