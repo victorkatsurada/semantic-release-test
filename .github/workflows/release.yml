@@ -22,6 +22,6 @@ jobs:
             ['@semantic-release/commit-analyzer', '@semantic-release/release-notes-generator', '@semantic-release/github']
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-     - name: Release
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: npx semantic-release
+        - name: Release
+          if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+          run: npx semantic-release
