@@ -11,11 +11,7 @@ jobs:
 
       - uses: actions/setup-node@v1
         with:
-          node-version: 12.x
-
-      - run: npm ci
-
-      - run: npm run lint
+          node-version: 16.x
 
       # dog-food testing. Should not release here at all, cause it runs on a PR.
       - name: semantic-release
