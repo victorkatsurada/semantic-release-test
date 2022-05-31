@@ -1,1 +1,1 @@
-Teste release
+TESTE RELEASE
