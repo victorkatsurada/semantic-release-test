@@ -4,20 +4,19 @@ on:
     branches: 
       - main
 jobs:
-  validate:
-    runs-on: ubuntu-latest
+  runs-on: ubuntu-latest
 
-      # dog-food testing. Should not release here at all, cause it runs on a PR.
-      - name: semantic-release
-        id: semantic-test
-        uses: ./
-        with:
-          dry_run: true
-          branches: 
-            - main
-          repository_url: https://github.com/victorkatsurada/semantic-release-test.git
-          tag_format: 'v${version}'
-          plugins: |
-            ['@semantic-release/commit-analyzer', '@semantic-release/release-notes-generator', '@semantic-release/github']
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # dog-food testing. Should not release here at all, cause it runs on a PR.
+    - name: semantic-release
+      id: semantic-test
+      uses: ./
+      with:
+        dry_run: true
+        branches: 
+          - main
+        repository_url: https://github.com/victorkatsurada/semantic-release-test.git
+        tag_format: 'v${version}'
+        plugins: |
+          ['@semantic-release/commit-analyzer', '@semantic-release/release-notes-generator', '@semantic-release/github']
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
