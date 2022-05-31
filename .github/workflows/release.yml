@@ -13,6 +13,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: semantic-release
+        uses: ./
         with:
           dry_run: true
           repository_url: https://github.com/victorkatsurada/semantic-release-test.git
