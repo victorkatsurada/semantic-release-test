@@ -16,6 +16,7 @@ jobs:
         uses: actions/setup-node@v2.1.5
         with:
           semantic_version: 15.13.28
+      - uses: docker://victorkatsurada/semantic-release-test:v1
       - name: semantic-release
         uses: ./
         with:
