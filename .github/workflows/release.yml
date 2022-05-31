@@ -1,23 +1,19 @@
 name: Release
+
 on:
   push:
-    branches: 
+    branches:
       - main
+
 jobs:
   release:
-    name: Release
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Setup Node.js
-        uses: actions/setup-node@v2.1.5
-        with:
-          semantic_version: 15.13.28
-      - uses: docker://ghcr.io/victorkatsurada/semantic-release-test:v1
+      - uses: actions/checkout@v1
+
       - name: semantic-release
+        id: semantic
         uses: ./
         with:
           dry_run: true
@@ -25,4 +21,5 @@ jobs:
           tag_format: 'v${version}'
           plugins: |
             ['@semantic-release/commit-analyzer', '@semantic-release/release-notes-generator', '@semantic-release/github']
-     
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
