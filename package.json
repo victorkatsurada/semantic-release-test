@@ -1,0 +1,39 @@
+{
+  "name": "semantic-release-test",
+  "version": "1.0.0",
+  "description": "**TESTE RELEASE",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victorkatsurada/semantic-release-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/victorkatsurada/semantic-release-test/issues"
+  },
+  "homepage": "https://github.com/victorkatsurada/semantic-release-test#readme",
+  "release": {
+    "branches": "main",
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
+      [
+        "@semantic-release/github"
+      ]
+    ]
+  },
+  "devDependencies": {
+    "semantic-release": "^19.0.2"
+  }
+}
