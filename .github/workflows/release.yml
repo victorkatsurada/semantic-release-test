@@ -14,8 +14,6 @@ jobs:
           fetch-depth: 0
       - name: semantic-release
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        id: semantic-test
-        uses: ./
         with:
           dry_run: true
           repository_url: https://github.com/victorkatsurada/semantic-release-test.git
@@ -24,4 +22,6 @@ jobs:
             ['@semantic-release/commit-analyzer', '@semantic-release/release-notes-generator', '@semantic-release/github']
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+     - name: Release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: npx semantic-release
