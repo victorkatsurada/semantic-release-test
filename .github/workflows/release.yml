@@ -1,0 +1,20 @@
+name: Release
+on:
+  push:
+    branches: [main]
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - run: codfish/semantic-release-action@v1
+        with:
+          dry_run: true
+          branches: [main]
+          repository_url: https://github.com/victorkatsurada/semantic-release-test.git
+          tag_format: 'v${version}'
+          extends: '@semantic-release/apm-config'
+          plugins: |
+            ['@semantic-release/commit-analyzer', '@semantic-release/release-notes-generator', '@semantic-release/github']
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
