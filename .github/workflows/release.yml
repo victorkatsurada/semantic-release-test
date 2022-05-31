@@ -23,8 +23,21 @@ jobs:
         uses: ./
         with:
           dry_run: true
-          branches: 
-            - main
+          branches: |
+            [
+              '+([0-9])?(.{+([0-9]),x}).x',
+              'main',
+              'next',
+              'next-major',
+              {
+                name: 'beta',
+                prerelease: true
+              },
+              {
+                name: 'alpha',
+                prerelease: true
+              }
+            ]
           repository_url: https://github.com/victorkatsurada/semantic-release-test.git
           tag_format: 'v${version}'
           plugins: |
