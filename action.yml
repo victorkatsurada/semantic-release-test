@@ -45,4 +45,3 @@ outputs:
     description: 'Version of the previous release, if there was one.'
 runs:
   using: 'node16'
-  main: 'index.js'
