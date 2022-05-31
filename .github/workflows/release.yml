@@ -16,9 +16,9 @@ jobs:
         uses: actions/setup-node@v2.1.5
         with:
           semantic_version: 15.13.28
-       - name: semantic-release
-         uses: ./
-         with:
+      - name: semantic-release
+        uses: ./
+        with:
           dry_run: true
           repository_url: https://github.com/victorkatsurada/semantic-release-test.git
           tag_format: 'v${version}'
