@@ -5,56 +5,29 @@ on: push
 jobs:
   validate:
     runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v1
-
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 16.x
-
-      # dog-food testing. Should not release here at all, cause it runs on a PR.
-      - name: semantic-release
-        id: semantic-test
-        uses: ./
-        with:
-          dry_run: true
-          branches: |
-            [
-              '+([0-9])?(.{+([0-9]),x}).x',
-              'main',
-              'next',
-              'next-major',
-              {
-                name: 'beta',
-                prerelease: true
-              },
-              {
-                name: 'alpha',
-                prerelease: true
-              }
-            ]
-          repository_url: https://github.com/victorkatsurada/semantic-release-test.git
-          tag_format: 'v${version}'
-          plugins: |
-            ['@semantic-release/commit-analyzer', '@semantic-release/release-notes-generator', '@semantic-release/npm', '@semantic-release/github']
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # dog-food testing. Should not release here at all, cause it runs on a PR.
-      - name: semantic-release with no inputs
-        id: semantic
-        uses: ./
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: test output
-        if: steps.semantic.outputs.new-release-published == 'false'
-        run: |
-          echo "$OUTPUTS"
-          echo "should be false: $NEW_RELEASE_PUBLISHED"
-          echo "should be empty: $RELEASE_MAJOR"
-          echo "should be empty: $RELEASE_MINOR"
-          echo "should be empty: $RELEASE_PATCH"
-        env:
-          OUTPUTS: ${{ toJson(steps.semantic.outputs) }}
+      steps:
+        - run: codfish/semantic-release-action@v1
+          with:
+            dry_run: true
+            branches: |
+              [
+                '+([0-9])?(.{+([0-9]),x}).x',
+                'main',
+                'next',
+                'next-major',
+                {
+                  name: 'beta',
+                  prerelease: true
+                },
+                {
+                  name: 'alpha',
+                  prerelease: true
+                }
+              ]
+            repository_url: https://github.com/victorkatsurada/Funeel-Dimensions-and-Metrics.git
+            tag_format: 'v${version}'
+            extends: '@semantic-release/apm-config'
+            plugins: |
+              ['@semantic-release/commit-analyzer', '@semantic-release/release-notes-generator', '@semantic-release/npm', '@semantic-release/github']
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
