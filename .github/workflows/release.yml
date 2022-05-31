@@ -1,16 +1,20 @@
 name: Release
 on:
   push:
-    branches: [main]
+    branches: 
+      - main
 jobs:
-  release:
-    name: Release
+  validate:
     runs-on: ubuntu-latest
-    steps:
-      - run: victorkatsurada/semantic-release-test@v1
+
+      # dog-food testing. Should not release here at all, cause it runs on a PR.
+      - name: semantic-release
+        id: semantic-test
+        uses: ./
         with:
           dry_run: true
-          branches: [main]
+          branches: 
+            - main
           repository_url: https://github.com/victorkatsurada/semantic-release-test.git
           tag_format: 'v${version}'
           plugins: |
