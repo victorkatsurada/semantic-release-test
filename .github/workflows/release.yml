@@ -13,8 +13,6 @@ jobs:
         uses: ./
         with:
           dry_run: true
-          branches: 
-            - main
           repository_url: https://github.com/victorkatsurada/semantic-release-test.git
           tag_format: 'v${version}'
           plugins: |
