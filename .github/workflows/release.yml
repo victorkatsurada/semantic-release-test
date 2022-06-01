@@ -13,6 +13,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Release
+        uses: ./
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         with:
           plugins: |
