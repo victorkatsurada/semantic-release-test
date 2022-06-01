@@ -13,10 +13,8 @@ jobs:
         with:
           fetch-depth: 0
       - name: Release
-        uses: ./
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        with:
-          plugins: |
-            ['@semantic-release/commit-analyzer', '@semantic-release/release-notes-generator', '@semantic-release/npm', '@semantic-release/github']
         env:
           GH_TOKEN: ${{secrets.GH_TOKEN}}
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+        run: npx semantic-release
